@@ -1,4 +1,5 @@
 import { RegisterFormData } from "./pages/Register";
+import { SignInFromData } from "./pages/SignIn";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const register = async (formData: RegisterFormData) => {
@@ -18,6 +19,25 @@ export const register = async (formData: RegisterFormData) => {
   }
 };
 
+export const signIn = async (formData: SignInFromData) => {
+  const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  });
+
+  const body = await response.json();
+
+  if (!response.ok) {
+    throw new Error(body.message);
+  }
+
+  return body;
+};
+
 export const validateToken = async () => {
   const response = await fetch(`${API_BASE_URL}/api/auth/validate-token`, {
     credentials: "include",
@@ -27,4 +47,15 @@ export const validateToken = async () => {
     throw new Error("Token is not valid");
   }
   return response.json();
+};
+
+export const singOut = async () => {
+  const response = await fetch(`${API_BASE_URL}/api/auth/logout`, {
+    credentials: "include",
+    method: "POST",
+  });
+
+  if (!response.ok) {
+    throw new Error("Error during singout");
+  }
 };
