@@ -1,4 +1,3 @@
-import React from "react";
 import { useFormContext } from "react-hook-form";
 import { HotelFormData } from "./ManageHotelForm";
 
@@ -24,13 +23,13 @@ const GuestsSection = () => {
           />
           {errors.adultCount && (
             <span className="text-red-500 text-sm fold-bold">
-              {errors.adultCount.message}
+              {errors.adultCount?.message}
             </span>
           )}
         </label>
 
         <label className="text-gray-700 text-sm font-semibold">
-          CHildren
+          Children
           <input
             className="border rounded w-full py-2 px-3 font-normal"
             type="number"
@@ -41,7 +40,7 @@ const GuestsSection = () => {
           />
           {errors.childCount && (
             <span className="text-red-500 text-sm fold-bold">
-              {errors.childCount.message}
+              {errors.childCount?.message}
             </span>
           )}
         </label>
