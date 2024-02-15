@@ -23,7 +23,7 @@ const SignOutButton = () => {
       onClick={handleClick}
       className="text-blue-600 px-3 font-bold bg-white hover:bg-grey-100"
     >
-      Sing Out
+      Sign Out
     </button>
   );
 };
