@@ -99,7 +99,7 @@ router.post(
     const totalCost = hotel.pricePerNight * numberOfNights;
 
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: totalCost,
+      amount: totalCost * 100,
       currency: "aud",
       metadata: {
         hotelId,
@@ -145,7 +145,7 @@ router.post(
 
       if (paymentIntent.status !== "succeeded") {
         return res.status(400).json({
-          message: `payment intent not succeeded. status: ${paymentIntent.status}`,
+          message: `payment intent not succeeded. Status: ${paymentIntent.status}`,
         });
       }
 
