@@ -16,7 +16,7 @@ type Props = {
   paymentIntent: PaymentIntentResponse;
 };
 
-export type BookingFromData = {
+export type BookingFormData = {
   firstName: string;
   lastName: string;
   email: string;
@@ -41,7 +41,7 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
     apiClient.createRoomBooking,
     {
       onSuccess: () => {
-        showToast({ message: "Booking Successful", type: "SUCCESS" });
+        showToast({ message: "c", type: "SUCCESS" });
       },
       onError: () => {
         showToast({ message: "Error saving booking", type: "ERROR" });
@@ -49,7 +49,7 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
     }
   );
 
-  const { handleSubmit, register } = useForm<BookingFromData>({
+  const { handleSubmit, register } = useForm<BookingFormData>({
     defaultValues: {
       firstName: currentUser.firstName,
       lastName: currentUser.lastName,
@@ -64,7 +64,7 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
     },
   });
 
-  const onSubmit = async (formData: BookingFromData) => {
+  const onSubmit = async (formData: BookingFormData) => {
     if (!stripe || !elements) {
       return;
     }
@@ -74,7 +74,7 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
       },
     });
 
-    if (result.paymentIntent?.status == "succeeded") {
+    if (result.paymentIntent?.status === "succeeded") {
       bookRoom({ ...formData, paymentIntentId: result.paymentIntent.id });
     }
   };
@@ -86,7 +86,7 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
     >
       <span className="text-3xl font-bold">Confirm Your Details</span>
       <div className="grid grid-cols-2 gap-6">
-        <label className="text-grey-700 text-sm font-bold flex-1">
+        <label className="text-gray-700 text-sm font-bold flex-1">
           First Name
           <input
             className="mt-1 border rounded w-full py-2 px-3 text-gray-700 bg-gray-200 font-normal"
@@ -96,7 +96,7 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
             {...register("firstName")}
           />
         </label>
-        <label className="text-grey-700 text-sm font-bold flex-1">
+        <label className="text-gray-700 text-sm font-bold flex-1">
           Last Name
           <input
             className="mt-1 border rounded w-full py-2 px-3 text-gray-700 bg-gray-200 font-normal"
@@ -106,7 +106,7 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
             {...register("lastName")}
           />
         </label>
-        <label className="text-grey-700 text-sm font-bold flex-1">
+        <label className="text-gray-700 text-sm font-bold flex-1">
           Email
           <input
             className="mt-1 border rounded w-full py-2 px-3 text-gray-700 bg-gray-200 font-normal"
