@@ -5,7 +5,7 @@ type Props = {
   hotel: HotelType;
 };
 
-const LatestDestinationCard = ({ hotel }: Porps) => {
+const LatestDestinationCard = ({ hotel }: Props) => {
   return (
     <Link
       to={`/detail/${hotel._id}`}
